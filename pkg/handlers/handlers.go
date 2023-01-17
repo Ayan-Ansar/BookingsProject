@@ -1,32 +1,32 @@
 package handlers
 
 import (
+	"net/http"
+
 	"github.com/Ayan-Ansar/bookings/pkg/config"
 	"github.com/Ayan-Ansar/bookings/pkg/models"
 	"github.com/Ayan-Ansar/bookings/pkg/render"
-	"net/http"
 )
 
-var Repo *Repository 
+var Repo *Repository
 
-type Repository struct{
+type Repository struct {
 	App *config.AppConfig
 }
 
-func NewRepo(a *config.AppConfig) *Repository{
+func NewRepo(a *config.AppConfig) *Repository {
 	return &Repository{
 		App: a,
 	}
 }
 
-func NewHandlers(r *Repository){
+func NewHandlers(r *Repository) {
 	Repo = r
 }
 
-
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	remoteIP := r.RemoteAddr
-	m.App.Session.Put(r.Context(), "remote_ip", remoteIP) // storing the users remote ip as a string in the session 
+	m.App.Session.Put(r.Context(), "remote_ip", remoteIP) // storing the users remote ip as a string in the session
 	render.RenderTemplate(w, "home.page.html", &models.TemplateData{})
 }
 
@@ -43,3 +43,4 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 		StringMap: stringMap,
 	})
 }
+

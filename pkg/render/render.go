@@ -4,10 +4,11 @@ import (
 	"bytes"
 	"html/template"
 	"log"
-	"github.com/Ayan-Ansar/bookings/pkg/config"
-	"github.com/Ayan-Ansar/bookings/pkg/models"
 	"net/http"
 	"path/filepath"
+
+	"github.com/Ayan-Ansar/bookings/pkg/config"
+	"github.com/Ayan-Ansar/bookings/pkg/models"
 )
 
 var app *config.AppConfig
