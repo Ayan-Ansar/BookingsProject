@@ -1,0 +1,29 @@
+.my-footer {
+    height: 100px;
+    background-color: rgb(39, 46, 51);
+    margin-top: 25px;
+    padding-top: 10px;
+    padding-left: 10px;
+    color: whitesmoke;
+    font-size: medium;
+  }
+
+  .room-image {
+    max-width: 50%;
+  }
+  .avail-form {
+    max-width: 60%;
+    padding-top: 25px;
+  }
+  .submit-btn {
+    max-width: 30%;
+    padding-left: 12px;
+  }
+
+  .notie-container {
+    box-shadow: none;
+  }
+
+  .datepicker {
+    z-index: 10000;
+  }
