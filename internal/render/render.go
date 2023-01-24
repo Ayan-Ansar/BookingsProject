@@ -7,8 +7,9 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/Ayan-Ansar/bookings/pkg/config"
-	"github.com/Ayan-Ansar/bookings/pkg/models"
+	"github.com/Ayan-Ansar/bookings/internal/config"
+	"github.com/Ayan-Ansar/bookings/internal/models"
+	"github.com/justinas/nosurf"
 )
 
 var app *config.AppConfig
@@ -17,7 +18,15 @@ func NewTemplate(a *config.AppConfig) {
 	app = a
 }
 
-func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData) {
+func AddDefaultData(td *models.TemplateData, r *http.Request)  *models.TemplateData {
+	td.CSRFToken = nosurf.Token(r)
+
+	return td
+}
+
+
+
+func RenderTemplate(w http.ResponseWriter, r *http.Request, html string, td *models.TemplateData) {
 	// create template cache
 
 	var tc map[string]*template.Template
@@ -33,6 +42,7 @@ func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData)
 		log.Fatal("Could not get template from template cache")
 	}
 
+	td = AddDefaultData(td, r)
 	buf := new(bytes.Buffer)
 	err := t.Execute(buf, td)
 	if err != nil {
